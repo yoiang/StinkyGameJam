@@ -90,7 +90,6 @@ package StinkyGameJam
 		
 		public function stopJumping() : void
 		{
-			sprAssetPlayer1.play("stand");
 			jumping = false;
 		}
 		
@@ -114,6 +113,7 @@ package StinkyGameJam
 			}
 			if ( y + height > FP.screen.height - 10 )
 			{
+				sprAssetPlayer1.play("stand");
 				y = FP.screen.height - height - 10;
 				velocity.y = -velocity.y * 0.5;
 			}
