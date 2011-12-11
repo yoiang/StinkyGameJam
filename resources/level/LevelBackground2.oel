@@ -1,0 +1,14 @@
+<level>
+  <width>256</width>
+  <height>512</height>
+  <background set="tiles">
+    <tile tx="0" ty="0" x="0" y="384"/>
+    <tile tx="0" ty="0" x="128" y="384"/>
+    <tile tx="384" ty="0" x="128" y="256"/>
+    <tile tx="128" ty="0" x="0" y="256"/>
+    <tile tx="128" ty="0" x="0" y="128"/>
+    <tile tx="128" ty="0" x="0" y="0"/>
+    <tile tx="128" ty="0" x="128" y="0"/>
+    <tile tx="128" ty="0" x="128" y="128"/>
+  </background>
+</level>

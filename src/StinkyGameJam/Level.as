@@ -12,7 +12,9 @@ package StinkyGameJam
 	public class Level extends Entity
 	{
 		[ Embed( source="resources/level/LevelBackground1.oel", mimeType="application/octet-stream" ) ] private static const AssetBackground1 : Class;		
+		[ Embed( source="resources/level/LevelBackground2.oel", mimeType="application/octet-stream" ) ] private static const AssetBackground2 : Class;		
 		[ Embed( source="resources/level/LevelObjects1.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjects1 : Class;		
+		[ Embed( source="resources/level/LevelObjects2.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjects2 : Class;		
 		
 		protected var _backgroundChunkAssets : Vector.<LevelBackgroundChunk>;
 		protected var _currentBackgroundChunkIndices : Vector.< int >;
@@ -33,11 +35,13 @@ package StinkyGameJam
 					
 			_backgroundChunkAssets = new Vector.<LevelBackgroundChunk>();
 			_backgroundChunkAssets.push( new LevelBackgroundChunk( AssetBackground1 ) );
+			_backgroundChunkAssets.push( new LevelBackgroundChunk( AssetBackground2 ) );
 			_currentBackgroundChunkIndices = new Vector.<int>();
 			_currentBackgroundScrollDistance = 0;
 			
 			_objectsChunkAssets = new Vector.<LevelObjectsChunk>();
 			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjects1 ) );			
+			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjects2 ) );			
 			_currentObjectChunkIndices = new Vector.<int>();
 			_currentObjectScrollDistance = 0;
 
