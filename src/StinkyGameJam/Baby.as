@@ -24,6 +24,7 @@ package StinkyGameJam
 		protected var acceleration : Vector3D;
 		
 		public function Baby(x:Number=0, y:Number=0)
+		public var coins : int;
 		{
 			var graphic : Graphic = null;
 			if ( Math.random() < 0.5 )
@@ -48,6 +49,8 @@ package StinkyGameJam
 			
 			velocity = new Vector3D( 0, 0 );
 			acceleration = new Vector3D( 0, 1000 );
+			
+			coins = 0;
 		}
 		
 		override public function update():void
@@ -97,17 +100,12 @@ package StinkyGameJam
 		
 		protected function checkCollision() : void
 		{
-			var platform : Platform = collide( "platform", x, y ) as Platform;
-			if ( platform )			
+			var worldObject : WorldObject = collide( "WorldObject", x, y ) as WorldObject;
+			if ( worldObject )			
 			{
+				worldObject.affectBaby( this );
 			}
-			
-			var item : Item = collide( "item", x, y ) as Item;
-			if ( item )
-			{
-				give( item );
-			}
-			
+
 			if ( y < 0 )
 			{
 				y = 0;

@@ -17,4 +17,11 @@ package StinkyGameJam
 			addGraphic( new Text( "Stinky World" ) );
 		}
 	}
-}
+}		override public function remove(e:Entity):Entity
+		{
+			var worldObject : WorldObject = e as WorldObject;
+			if ( worldObject )
+			{
+				level.objectDestroyed( worldObject );
+			}
+			return super.remove( e );
