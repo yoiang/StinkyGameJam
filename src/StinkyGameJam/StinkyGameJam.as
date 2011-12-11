@@ -9,6 +9,7 @@ package StinkyGameJam
 		{
 			super( 320, 240 );
 			FP.screen.scale = 2;
+			FP.console.enable();
 		}
 		
 		override public function init() : void
