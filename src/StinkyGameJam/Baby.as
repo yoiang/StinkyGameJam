@@ -112,12 +112,17 @@ package StinkyGameJam
 				y = 0;
 				velocity.y = 0;
 			}
-			if ( y + height > FP.screen.height - 30 )
+			if ( y + height > FP.screen.height )
 			{
-				sprAssetPlayer1.play("stand");
-				y = FP.screen.height - height - 30;
-				velocity.y = -velocity.y * Config.bounceRate;
+				y = FP.screen.height - height;
+				bounce();
 			}
+		}
+		
+		public function bounce() : void
+		{
+			sprAssetPlayer1.play("stand");
+			velocity.y = -velocity.y * Config.bounceRate;			
 		}
 		
 		public function give( item : WorldObject ) : void
