@@ -15,7 +15,8 @@ package StinkyGameJam
 		override public function affectBaby( baby : Baby ) : void
 		{		
 			// TODO: decide which direction approached from, push back
-			baby.x += height;
+			baby.y = y - baby.height - 1;
+			baby.bounce();
 		}
 	}
 }
