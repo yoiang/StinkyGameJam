@@ -1,9 +1,0 @@
-<level>
-  <width>256</width>
-  <height>512</height>
-  <objects>
-    <playerStart x="32" y="352"/>
-    <coin x="32" y="32"/>
-    <coin x="128" y="160"/>
-  </objects>
-</level>

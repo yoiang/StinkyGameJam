@@ -1,0 +1,11 @@
+<level>
+  <width>256</width>
+  <height>512</height>
+  <objects>
+    <platform x="0" y="480"/>
+    <playerStart x="96" y="352"/>
+    <coin x="96" y="256"/>
+    <coin x="96" y="160"/>
+    <coin x="96" y="64"/>
+  </objects>
+</level>

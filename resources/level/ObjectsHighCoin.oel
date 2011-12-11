@@ -2,9 +2,8 @@
   <width>256</width>
   <height>512</height>
   <objects>
-    <playerStart x="64" y="256"/>
     <coin x="128" y="32"/>
-    <coin x="192" y="160"/>
-    <coin x="160" y="320"/>
+    <platform x="0" y="480"/>
+    <playerStart x="96" y="352"/>
   </objects>
 </level>

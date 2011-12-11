@@ -6,7 +6,7 @@ package StinkyGameJam
 	
 	public class Platform extends WorldObject
 	{
-		[ Embed( source = 'resources/levelEditor/coin.png' ) ] private const AssetImage : Class;
+		[ Embed( source = 'resources/levelEditor/platform.png' ) ] private const AssetImage : Class;
 		public function Platform( x : Number, y : Number )
 		{
 			super( x, y, new Image( AssetImage ) );

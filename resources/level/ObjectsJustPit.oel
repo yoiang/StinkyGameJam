@@ -1,0 +1,7 @@
+<level>
+  <width>256</width>
+  <height>512</height>
+  <objects>
+    <playerStart x="96" y="96"/>
+  </objects>
+</level>
