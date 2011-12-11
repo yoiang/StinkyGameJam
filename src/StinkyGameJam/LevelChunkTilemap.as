@@ -5,12 +5,11 @@ package StinkyGameJam
 	
 	public class LevelChunkTilemap extends WorldObject
 	{
-		public function LevelChunkTilemap( x : uint, y : uint, tileset:*, setWidth:uint, height:uint, tileWidth:uint, tileHeight:uint, tileList : XMLList )
+		public function LevelChunkTilemap( x : uint, y : uint, tileset:*, setWidth:uint, setHeight:uint, tileWidth:uint, tileHeight:uint, tileList : XMLList )
 		{
-			super( x, y, LevelChunkTilemap.createTilemap( tileset, setWidth, height, tileWidth, tileHeight, tileList ) );
-			layer = 10;
-			
-			width = setWidth
+			var tilemap : Tilemap = LevelChunkTilemap.createTilemap( tileset, setWidth, setHeight, tileWidth, tileHeight, tileList );
+			super( x, y, 128, 128, tilemap, 10 );
+			setHitbox();
 		}
 		
 		protected static function createTilemap( asset : *, width : Number, height : Number, tileWidth : Number, tileHeight : Number, tileList : XMLList ) : Tilemap

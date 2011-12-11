@@ -6,12 +6,16 @@ package StinkyGameJam
 	
 	public class WorldObject extends Entity
 	{
-		public function WorldObject( x : Number, y : Number, setGraphic : Graphic )
+		public function WorldObject( x : Number, y : Number, setWidth : Number, setHeight : Number, setGraphic : Graphic, setLayer : uint = 0 )
 		{
 			super( x, y, setGraphic );
-			layer = 5;
-			
 			type = "WorldObject";
+			
+			width = setWidth;
+			height = setHeight;
+			setHitbox( width, height );
+			
+			layer = setLayer;
 		}
 		
 		override public function update():void

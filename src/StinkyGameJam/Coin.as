@@ -14,10 +14,7 @@ package StinkyGameJam
 		
 		public function Coin( x : uint, y : uint )
 		{
-			super( x, y, new Image( AssetImage ) );
-			layer = 1;
-						
-			setHitbox( 64, 64 ); // lame, width and height aren't set yet
+			super( x, y, 64, 64, new Image( AssetImage ), 1 );
 			
 			collectSound = new Sfx( AssetCollectSound );
 			collectSound.pan = 0.5;
