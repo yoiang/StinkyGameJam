@@ -1,0 +1,19 @@
+<project>
+	<name>Stinky Game Objects</name>
+	<settings>
+		<defaultWidth>256</defaultWidth>
+		<defaultHeight>512</defaultHeight>
+	</settings>
+	
+	<tilesets>
+	</tilesets>
+	
+	<objects>
+		<object name="playerStart" image="playerStart.png" width="90" height="128" limit="1" />
+		<object name="coin" image="coin.png" width="64" height="64" />
+	</objects>
+	
+	<layers>
+		<objects name="objects" gridSize="32" />
+	</layers>
+</project>
