@@ -1,0 +1,7 @@
+{
+    "output": "stinky_game_jam.js",
+    "extensions": ["js", "gif", "jpeg", "jpg", "png", "tmx", "tsx", "plist"],
+    "paths": {
+        "src" : "/"
+    }
+}
