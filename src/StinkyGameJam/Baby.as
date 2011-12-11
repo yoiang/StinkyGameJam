@@ -1,8 +1,8 @@
 package StinkyGameJam
 {
-	import flash.geom.Vector3D;
-	
 	import flash.display.BitmapData;
+	import flash.geom.Vector3D;
+	import flash.sensors.Accelerometer;
 	
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
@@ -36,9 +36,12 @@ package StinkyGameJam
 		{
 			sprAssetPlayer1.add("stand", [0, 1], 3, true);
 			sprAssetPlayer1.add("jump", [2, 3], 3, true);
-			var graphic : Graphic = sprAssetPlayer1;
 			sprAssetPlayer1.play("stand");
-			super( startPosition.x, startPosition.y, graphic, null );
+			
+			explosionEmitter = Baby.createExplosionEmitter();
+			
+			var graphicList : Graphiclist = new Graphiclist( sprAssetPlayer1, explosionEmitter );
+			super( startPosition.x, startPosition.y, graphicList, null );
 				
 			type = "player";
 			layer = 0;
@@ -56,15 +59,18 @@ package StinkyGameJam
 			acceleration = new Vector3D( 0, Config.fallingAcceleration );
 			
 			coins = 0;
-			
-			explosionEmitter = new Emitter(new BitmapData(1,1),1,1);
+		}
+		
+		protected static function createExplosionEmitter() : Emitter
+		{
+			var explosionEmitter : Emitter = new Emitter(new BitmapData(1,1),1,1);
 			// Define our particles
 			explosionEmitter.newType("explode",[0]);
 			explosionEmitter.setAlpha("explode",1,0);
 			explosionEmitter.setMotion("explode", 0, 50, 2, 360, -40, -0.5, Ease.quadOut);
 			
 			explosionEmitter.relative = false;
-			graphic = new Graphiclist(sprAssetPlayer1, explosionEmitter);
+			return explosionEmitter;
 		}
 		
 		override public function update():void
