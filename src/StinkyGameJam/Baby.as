@@ -8,13 +8,14 @@ package StinkyGameJam
 	import net.flashpunk.Mask;
 	import net.flashpunk.Sfx;
 	import net.flashpunk.graphics.Image;
+	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.utils.Input;
 	import net.flashpunk.utils.Key;
 	
 	public class Baby extends Entity
 	{
-		[ Embed( source = 'resources/player1.png' ) ] private const AssetPlayer1 : Class;
-		[ Embed( source = 'resources/player2.png' ) ] private const AssetPlayer2 : Class;
+		[ Embed( source = 'resources/baby-spritesheet.png' ) ] private const AssetPlayer1 : Class;
+		public var sprAssetPlayer1:Spritemap = new Spritemap(AssetPlayer1, 96, 135);
 		
 		[ Embed( source = 'resources/jump.mp3' ) ] private const AssetJump : Class;
 		
@@ -25,21 +26,17 @@ package StinkyGameJam
 		
 		public function Baby(x:Number=0, y:Number=0)
 		{
-			var graphic : Graphic = null;
-			if ( Math.random() < 0.5 )
-			{
-				graphic = new Image( AssetPlayer1 );
-			} else
-			{
-				graphic = new Image( AssetPlayer2 );
-			}
+			sprAssetPlayer1.add("stand", [0, 1], 3, true);
+			sprAssetPlayer1.add("jump", [2, 3], 3, true);
+			var graphic : Graphic = sprAssetPlayer1;
+			sprAssetPlayer1.play("stand");
 			super(x, y, graphic, null);
 				
 			type = "player";
 			
-			width = 50;
-			height = 50;
-			setHitbox( 50, 50 );		
+			width = 96;
+			height = 135;
+			setHitbox( 96, 135 );		
 			
 			jumpSound = new Sfx( AssetJump );
 			jumpSound.pan = -0.5;
@@ -65,7 +62,7 @@ package StinkyGameJam
 			{
 				velocity.y = -10000 * FP.elapsed;
 				// toggle flag off
-//				stopJumping();
+				stopJumping();
 			}
 
 			x += velocity.x * FP.elapsed;
@@ -86,12 +83,14 @@ package StinkyGameJam
 
 		public function startJumping() : void
 		{
+			sprAssetPlayer1.play("jump");
 			jumpSound.play();
 			jumping = true;
 		}
 		
 		public function stopJumping() : void
 		{
+			sprAssetPlayer1.play("stand");
 			jumping = false;
 		}
 		
