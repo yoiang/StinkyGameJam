@@ -1,16 +1,19 @@
 package StinkyGameJam
 {
+	import flash.display.BitmapData;
 	import flash.geom.Vector3D;
+	import flash.sensors.Accelerometer;
 	
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
 	import net.flashpunk.Mask;
 	import net.flashpunk.Sfx;
+	import net.flashpunk.graphics.Emitter;
+	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Spritemap;
-	import net.flashpunk.utils.Input;
-	import net.flashpunk.utils.Key;
+	import net.flashpunk.utils.*;
 	
 	public class Baby extends Entity
 	{
@@ -26,13 +29,19 @@ package StinkyGameJam
 		
 		public var coins : int;
 		
+		protected var explosionEmitter:Emitter;
+		protected const EXPLOSION_SIZE:uint = 100;
+		
 		public function Baby( startPosition : Vector3D )
 		{
 			sprAssetPlayer1.add("stand", [0, 1], 3, true);
 			sprAssetPlayer1.add("jump", [2, 3], 3, true);
-			var graphic : Graphic = sprAssetPlayer1;
 			sprAssetPlayer1.play("stand");
-			super( startPosition.x, startPosition.y, graphic, null );
+			
+			explosionEmitter = Baby.createExplosionEmitter();
+			
+			var graphicList : Graphiclist = new Graphiclist( sprAssetPlayer1, explosionEmitter );
+			super( startPosition.x, startPosition.y, graphicList, null );
 				
 			type = "player";
 			layer = 0;
@@ -50,6 +59,18 @@ package StinkyGameJam
 			acceleration = new Vector3D( 0, Config.fallingAcceleration );
 			
 			coins = 0;
+		}
+		
+		protected static function createExplosionEmitter() : Emitter
+		{
+			var explosionEmitter : Emitter = new Emitter(new BitmapData(1,1),1,1);
+			// Define our particles
+			explosionEmitter.newType("explode",[0]);
+			explosionEmitter.setAlpha("explode",1,0);
+			explosionEmitter.setMotion("explode", 0, 50, 2, 360, -40, -0.5, Ease.quadOut);
+			
+			explosionEmitter.relative = false;
+			return explosionEmitter;
 		}
 		
 		override public function update():void
@@ -90,6 +111,10 @@ package StinkyGameJam
 		public function startJumping() : void
 		{
 			sprAssetPlayer1.play("jump");
+			for (var i:uint = 0; i < EXPLOSION_SIZE; i++)
+			{
+				explosionEmitter.emit("explode",x, y);
+			}
 			jumpSound.play();
 			jumping = true;
 		}
