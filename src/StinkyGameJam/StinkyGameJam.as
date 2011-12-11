@@ -7,7 +7,7 @@ package StinkyGameJam
 	{
 		public function StinkyGameJam()
 		{
-			super( 640, 480 );
+			super( 1280, 480 );
 			FP.screen.scale = 1;
 			FP.console.enable();
 		}
