@@ -7,9 +7,9 @@ package StinkyGameJam
 	public class Platform extends WorldObject
 	{
 		[ Embed( source = 'resources/levelEditor/coin.png' ) ] private const AssetImage : Class;
-		public function Platform( x : Number, y : Number, speed : Number)
+		public function Platform( x : Number, y : Number )
 		{
-			super( x, y, speed, new Image( AssetImage ) );
+			super( x, y, new Image( AssetImage ) );
 		}
 		
 		override public function affectBaby( baby : Baby ) : void

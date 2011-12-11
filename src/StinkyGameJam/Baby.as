@@ -49,7 +49,7 @@ package StinkyGameJam
 			Input.define( "Jump", Key.ANY );
 			
 			velocity = new Vector3D( 0, 0 );
-			acceleration = new Vector3D( 0, 1000 );
+			acceleration = new Vector3D( 0, Config.fallingAcceleration );
 			
 			coins = 0;
 		}
@@ -68,7 +68,7 @@ package StinkyGameJam
 			velocity.y += acceleration.y * FP.elapsed;
 			if ( jumping )
 			{
-				velocity.y = -10000 * FP.elapsed;
+				velocity.y = -Config.jumpingSpeed * FP.elapsed;
 				// toggle flag off
 				//stopJumping();
 			}
@@ -116,7 +116,7 @@ package StinkyGameJam
 			if ( y + height > FP.screen.height - 10 )
 			{
 				y = FP.screen.height - height - 10;
-				velocity.y = -velocity.y * 0.5;
+				velocity.y = -velocity.y * Config.bounceRate;
 			}
 		}
 		

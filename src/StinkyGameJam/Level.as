@@ -33,7 +33,6 @@ package StinkyGameJam
 			_objectsChunkAssets = new Vector.<LevelObjectsChunk>();
 			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjects1 ) );
 			
-			_scrollSpeed = 500;
 			_objects = new Vector.<WorldObject>();
 			_currentObjectChunkIndices = new Vector.<int>();
 			_currentScrollDistance = 0;
@@ -53,7 +52,7 @@ package StinkyGameJam
 			{
 				chunkIndex = int( Math.floor( Math.random() * _objectsChunkAssets.length ) );
 				_currentObjectChunkIndices.push( chunkIndex );
-				( _objectsChunkAssets[ chunkIndex ] as LevelObjectsChunk ).createObjects( _objects, currentCoverage, _scrollSpeed );
+				( _objectsChunkAssets[ chunkIndex ] as LevelObjectsChunk ).createObjects( _objects, currentCoverage );
 				
 				currentCoverage += ( _objectsChunkAssets[ chunkIndex ] as LevelObjectsChunk ).width;
 			}
@@ -63,7 +62,7 @@ package StinkyGameJam
 		{
 			super.update();
 			
-			_currentScrollDistance += _scrollSpeed * FP.elapsed;
+			_currentScrollDistance += Config.levelScrollSpeed * FP.elapsed;
 			if ( _currentScrollDistance > ( _objectsChunkAssets[ 0 ] as LevelObjectsChunk ).width )
 			{
 				_currentScrollDistance -= ( _objectsChunkAssets[ 0 ] as LevelObjectsChunk ).width;

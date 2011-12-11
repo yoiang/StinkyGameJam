@@ -6,14 +6,10 @@ package StinkyGameJam
 	
 	public class WorldObject extends Entity
 	{
-		protected var _speed : Number;
-		
-		public function WorldObject( x : Number, y : Number, speed : Number, setGraphic : Graphic )
+		public function WorldObject( x : Number, y : Number, setGraphic : Graphic )
 		{
 			super( x, y, setGraphic );
 			type = "WorldObject";
-			
-			_speed = speed;
 		}
 		
 		override public function update():void
@@ -21,7 +17,7 @@ package StinkyGameJam
 			super.update();
 			
 			// TODO: query level for speed, don't store?
-			x -= _speed * FP.elapsed;
+			x += -Config.levelScrollSpeed * FP.elapsed;
 			if ( x + width < 0 )
 			{
 				destroy();

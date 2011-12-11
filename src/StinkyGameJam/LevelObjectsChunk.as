@@ -26,11 +26,11 @@ package StinkyGameJam
 			return new Vector3D( playerStart.@x, playerStart.@y );
 		}
 		
-		public function createObjects( addTo : Vector.< WorldObject >, offsetX : Number, speed : Number ) : void
+		public function createObjects( addTo : Vector.< WorldObject >, offsetX : Number ) : void
 		{
 			for each( var xml : XML in coins )
 			{
-				var coin : Coin = new Coin( int( xml.@x ) + offsetX, int( xml.@y ), speed );
+				var coin : Coin = new Coin( int( xml.@x ) + offsetX, int( xml.@y ) );
 				FP.world.add( coin );
 				addTo.push( coin );
 			}
