@@ -2,15 +2,18 @@ package StinkyGameJam
 {
 	import flash.geom.Vector3D;
 	
+	import flash.display.BitmapData;
+	
 	import net.flashpunk.Entity;
 	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
 	import net.flashpunk.Mask;
 	import net.flashpunk.Sfx;
+	import net.flashpunk.graphics.Emitter;
+	import net.flashpunk.graphics.Graphiclist;
 	import net.flashpunk.graphics.Image;
 	import net.flashpunk.graphics.Spritemap;
-	import net.flashpunk.utils.Input;
-	import net.flashpunk.utils.Key;
+	import net.flashpunk.utils.*;
 	
 	public class Baby extends Entity
 	{
@@ -25,6 +28,9 @@ package StinkyGameJam
 		protected var acceleration : Vector3D;
 		
 		public var coins : int;
+		
+		protected var explosionEmitter:Emitter;
+		protected const EXPLOSION_SIZE:uint = 100;
 		
 		public function Baby( startPosition : Vector3D )
 		{
@@ -50,6 +56,15 @@ package StinkyGameJam
 			acceleration = new Vector3D( 0, Config.fallingAcceleration );
 			
 			coins = 0;
+			
+			explosionEmitter = new Emitter(new BitmapData(1,1),1,1);
+			// Define our particles
+			explosionEmitter.newType("explode",[0]);
+			explosionEmitter.setAlpha("explode",1,0);
+			explosionEmitter.setMotion("explode", 0, 50, 2, 360, -40, -0.5, Ease.quadOut);
+			
+			explosionEmitter.relative = false;
+			graphic = new Graphiclist(sprAssetPlayer1, explosionEmitter);
 		}
 		
 		override public function update():void
@@ -90,6 +105,10 @@ package StinkyGameJam
 		public function startJumping() : void
 		{
 			sprAssetPlayer1.play("jump");
+			for (var i:uint = 0; i < EXPLOSION_SIZE; i++)
+			{
+				explosionEmitter.emit("explode",x, y);
+			}
 			jumpSound.play();
 			jumping = true;
 		}
