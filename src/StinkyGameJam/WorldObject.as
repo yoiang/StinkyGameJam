@@ -9,6 +9,8 @@ package StinkyGameJam
 		public function WorldObject( x : Number, y : Number, setGraphic : Graphic )
 		{
 			super( x, y, setGraphic );
+			layer = 5;
+			
 			type = "WorldObject";
 		}
 		

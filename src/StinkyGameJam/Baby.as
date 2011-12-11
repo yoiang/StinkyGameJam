@@ -35,6 +35,7 @@ package StinkyGameJam
 			super( startPosition.x, startPosition.y, graphic, null );
 				
 			type = "player";
+			layer = 0;
 			
 			width = 96;
 			height = 135;

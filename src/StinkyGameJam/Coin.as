@@ -10,6 +10,7 @@ package StinkyGameJam
 		public function Coin( x : Number, y : Number )
 		{
 			super( x, y, new Image( AssetImage ) );
+			layer = 1;
 						
 			setHitbox( 64, 64 ); // lame, width and height aren't set yet
 		}
