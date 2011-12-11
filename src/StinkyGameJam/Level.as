@@ -7,54 +7,78 @@ package StinkyGameJam
 	import net.flashpunk.Graphic;
 	import net.flashpunk.Mask;
 	import net.flashpunk.World;
+	import net.flashpunk.graphics.Tilemap;
 	
 	public class Level extends Entity
 	{
 		[ Embed( source="resources/level/LevelBackground1.oel", mimeType="application/octet-stream" ) ] private static const AssetBackground1 : Class;		
 		[ Embed( source="resources/level/LevelObjects1.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjects1 : Class;		
 		
-		protected var _objectsBackgroundAssets : Vector.<LevelBackgroundChunk>;
-		
-		protected var _objectsChunkAssets : Vector.<LevelObjectsChunk>;
-		
+		protected var _backgroundChunkAssets : Vector.<LevelBackgroundChunk>;
+		protected var _currentBackgroundChunkIndices : Vector.< int >;
+		protected var _currentBackgroundScrollDistance : Number;
+				
 		protected var _scrollSpeed : Number;
-		
-		protected var _objects : Vector.< WorldObject >;
+	
+		protected var _objectsChunkAssets : Vector.<LevelObjectsChunk>;
 		protected var _currentObjectChunkIndices : Vector.< int >;
-		protected var _currentScrollDistance : Number;
-		
+		protected var _currentObjectScrollDistance : Number;
+
+		protected var _worldObjects : Vector.< WorldObject >;
+
 		public function Level()
 		{
 			super( x, y );
 			type = "level";
 					
-			_objectsBackgroundAssets = new Vector.<LevelBackgroundChunk>();
-			_objectsBackgroundAssets.push( new LevelBackgroundChunk( AssetBackground1 ) );
-			_objectsChunkAssets = new Vector.<LevelObjectsChunk>();
-			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjects1 ) );
+			_backgroundChunkAssets = new Vector.<LevelBackgroundChunk>();
+			_backgroundChunkAssets.push( new LevelBackgroundChunk( AssetBackground1 ) );
+			_currentBackgroundChunkIndices = new Vector.<int>();
+			_currentBackgroundScrollDistance = 0;
 			
-			_objects = new Vector.<WorldObject>();
+			_objectsChunkAssets = new Vector.<LevelObjectsChunk>();
+			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjects1 ) );			
 			_currentObjectChunkIndices = new Vector.<int>();
-			_currentScrollDistance = 0;
-			fillObjectChunkIndices();			
+			_currentObjectScrollDistance = 0;
+
+			_worldObjects = new Vector.<WorldObject>();
+
+			fillChunkIndices();			
 		}
 		
-		protected function fillObjectChunkIndices() : void
+		protected function fillChunkIndices() : void
 		{
-			var currentCoverage : Number = -_currentScrollDistance;
-			for each( var chunkIndex : int in _currentObjectChunkIndices )
+			var screenWidth : Number = FP.screen.width;
+			
+			var currentCoverage : Number = -_currentBackgroundScrollDistance;
+			for each( var chunkIndex : int in _currentBackgroundChunkIndices )
 			{
-				currentCoverage += ( _objectsChunkAssets[ chunkIndex ] as LevelObjectsChunk ).width;
+				currentCoverage += ( _backgroundChunkAssets[ chunkIndex ] as LevelChunk ).width;
+			}
+
+			while ( currentCoverage < screenWidth )
+			{
+				
+				chunkIndex = int( Math.floor( Math.random() * _backgroundChunkAssets.length ) );
+				_currentBackgroundChunkIndices.push( chunkIndex );
+				( _backgroundChunkAssets[ chunkIndex ] as LevelBackgroundChunk ).createTilemap( _worldObjects, currentCoverage );
+				
+				currentCoverage += ( _backgroundChunkAssets[ chunkIndex ] as LevelChunk ).width;
 			}
 			
-			var screenWidth : Number = FP.screen.width;
+			currentCoverage = -_currentObjectScrollDistance;
+			for each( chunkIndex in _currentObjectChunkIndices )
+			{
+				currentCoverage += ( _objectsChunkAssets[ chunkIndex ] as LevelChunk ).width;
+			}
+			
 			while ( currentCoverage < screenWidth )
 			{
 				chunkIndex = int( Math.floor( Math.random() * _objectsChunkAssets.length ) );
 				_currentObjectChunkIndices.push( chunkIndex );
-				( _objectsChunkAssets[ chunkIndex ] as LevelObjectsChunk ).createObjects( _objects, currentCoverage );
+				( _objectsChunkAssets[ chunkIndex ] as LevelObjectsChunk ).createObjects( _worldObjects, currentCoverage );
 				
-				currentCoverage += ( _objectsChunkAssets[ chunkIndex ] as LevelObjectsChunk ).width;
+				currentCoverage += ( _objectsChunkAssets[ chunkIndex ] as LevelChunk ).width;
 			}
 		}
 		
@@ -62,14 +86,21 @@ package StinkyGameJam
 		{
 			super.update();
 			
-			_currentScrollDistance += Config.levelScrollSpeed * FP.elapsed;
-			if ( _currentScrollDistance > ( _objectsChunkAssets[ 0 ] as LevelObjectsChunk ).width )
+			_currentBackgroundScrollDistance += Config.levelScrollSpeed * FP.elapsed;
+			if ( _currentBackgroundScrollDistance > ( _backgroundChunkAssets[ 0 ] as LevelChunk ).width )
 			{
-				_currentScrollDistance -= ( _objectsChunkAssets[ 0 ] as LevelObjectsChunk ).width;
+				_currentBackgroundScrollDistance -= ( _backgroundChunkAssets[ 0 ] as LevelChunk ).width;
+				_currentBackgroundChunkIndices.shift();
+			}
+			
+			_currentObjectScrollDistance += Config.levelScrollSpeed * FP.elapsed;
+			if ( _currentObjectScrollDistance > ( _objectsChunkAssets[ 0 ] as LevelChunk ).width )
+			{
+				_currentObjectScrollDistance -= ( _objectsChunkAssets[ 0 ] as LevelChunk ).width;
 				_currentObjectChunkIndices.shift();
 			}
 			
-			fillObjectChunkIndices();
+			fillChunkIndices();
 		}
 		
 		public function getPlayerStart() : Vector3D
@@ -80,10 +111,10 @@ package StinkyGameJam
 		
 		public function objectDestroyed( object : WorldObject ) : void
 		{
-			var index : int = _objects.indexOf( object );
+			var index : int = _worldObjects.indexOf( object );
 			if ( index != -1 )
 			{
-				_objects.splice( index, 1 );
+				_worldObjects.splice( index, 1 );
 			}
 		}
 	}

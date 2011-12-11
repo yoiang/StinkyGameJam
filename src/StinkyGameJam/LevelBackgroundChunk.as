@@ -1,6 +1,7 @@
 package StinkyGameJam
 {
 	import net.flashpunk.Entity;
+	import net.flashpunk.FP;
 	import net.flashpunk.Graphic;
 	import net.flashpunk.Mask;
 	import net.flashpunk.graphics.Tilemap;
@@ -8,9 +9,9 @@ package StinkyGameJam
 	
 	public class LevelBackgroundChunk extends LevelChunk
 	{
-		protected var _tiles : Tilemap;
-		
 		[ Embed( source = 'resources/level/tileSet.png' ) ] private const AssetTileSet : Class;
+		
+		protected var _tileList : XMLList;
 		public function LevelBackgroundChunk( xml : Class )
 		{
 			super( xml );			
@@ -18,18 +19,14 @@ package StinkyGameJam
 		
 		override protected function handleXmlData(xml:XML):void
 		{
-			_tiles = new Tilemap( AssetTileSet, _width, _height, 128, 128 );
-			
-			var dataList : XMLList = xml.background.tile;
-			var dataElement : XML;
-			for each ( dataElement in dataList )
-			{
-				_tiles.setTile( 
-					int( dataElement.@x ) / _tiles.tileWidth, 
-					int( dataElement.@y ) / _tiles.tileHeight, 
-					int( dataElement.@tx ) / _tiles.tileWidth 
-				);
-			}			
+			_tileList = xml.background.tile;
+		}
+		
+		public function createTilemap( addTo : Vector.< WorldObject >, offsetX : Number ) : void
+		{
+			var tilemap : LevelChunkTilemap = new LevelChunkTilemap( offsetX, 0, AssetTileSet, width, height, 128, 128, _tileList );
+			FP.world.add( tilemap );
+			addTo.push( tilemap );
 		}
 	}
 }
