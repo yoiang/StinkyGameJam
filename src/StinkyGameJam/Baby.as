@@ -17,7 +17,7 @@ package StinkyGameJam
 	
 	public class Baby extends Entity
 	{
-		[ Embed( source = 'resources/baby-spritesheet.png' ) ] private const AssetPlayer1 : Class;
+		[ Embed( source = 'resources/baby.png' ) ] private const AssetPlayer1 : Class;
 		public var sprAssetPlayer1:Spritemap = new Spritemap(AssetPlayer1, 96, 135);
 		
 		[ Embed( source = 'resources/jump.mp3' ) ] private const AssetJump : Class;
