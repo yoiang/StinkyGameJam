@@ -18,6 +18,7 @@ package StinkyGameJam
 		[ Embed( source="resources/level/ObjectsJustPit.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjectsJustPit : Class;		
 		[ Embed( source="resources/level/ObjectsLotsOCoins.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjectsLotsOCoins : Class;		
 		[ Embed( source="resources/level/ObjectsThreeCoins.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjectsThreeCoins : Class;		
+		[ Embed( source="resources/level/ObjectsTwoPlatform.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjectsTwoPlatform : Class;		
 		
 		protected var _backgroundChunkAssets : Vector.<LevelBackgroundChunk>;
 		protected var _currentBackgroundChunkIndices : Vector.< int >;
@@ -47,7 +48,8 @@ package StinkyGameJam
 			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsHighCoin ) );			
 			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsJustPit ) );			
 			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsLotsOCoins ) );			
-			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsThreeCoins ) );			
+			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsThreeCoins ) );
+			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsTwoPlatform ) );
 			_currentObjectChunkIndices = new Vector.<int>();
 			_currentObjectScrollDistance = 0;
 
