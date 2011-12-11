@@ -10,14 +10,14 @@ package StinkyGameJam
 		[ Embed( source = 'resources/level/coin.png' ) ] private const AssetImage : Class;
 		[ Embed( source = 'resources/coinCollect.mp3' ) ] private const AssetCollectSound : Class;
 		
-		protected var collectSound : Sfx;
+		protected var _collectSound : Sfx;
 		
 		public function Coin( x : uint, y : uint )
 		{
 			super( x, y, 64, 64, new Image( AssetImage ), 1 );
 			
-			collectSound = new Sfx( AssetCollectSound );
-			collectSound.pan = 0.5;
+			_collectSound = new Sfx( AssetCollectSound );
+			_collectSound.pan = 0.5;
 		}
 		
 		override public function affectBaby( baby : Baby ) : void

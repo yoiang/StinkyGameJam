@@ -18,29 +18,29 @@ package StinkyGameJam
 	public class Baby extends Entity
 	{
 		[ Embed( source = 'resources/baby.png' ) ] private const AssetPlayer1 : Class;
-		public var sprAssetPlayer1:Spritemap = new Spritemap(AssetPlayer1, 96, 135);
+		protected var _sprAssetPlayer1:Spritemap = new Spritemap(AssetPlayer1, 96, 135);
 		
 		[ Embed( source = 'resources/jump.mp3' ) ] private const AssetJump : Class;
 		
-		protected var jumping : Boolean;
-		protected var jumpSound : Sfx;
-		protected var velocity : Vector3D;
-		protected var acceleration : Vector3D;
+		protected var _jumping : Boolean;
+		protected var _jumpSound : Sfx;
+		protected var _velocity : Vector3D;
+		protected var _acceleration : Vector3D;
 		
 		public var coins : int;
 		
-		protected var explosionEmitter:Emitter;
+		protected var _explosionEmitter:Emitter;
 		protected const EXPLOSION_SIZE:uint = 100;
 		
 		public function Baby( startPosition : Vector3D )
 		{
-			sprAssetPlayer1.add("stand", [0, 1], 3, true);
-			sprAssetPlayer1.add("jump", [2, 3], 3, true);
-			sprAssetPlayer1.play("stand");
+			_sprAssetPlayer1.add("stand", [0, 1], 3, true);
+			_sprAssetPlayer1.add("jump", [2, 3], 3, true);
+			_sprAssetPlayer1.play("stand");
 			
-			explosionEmitter = Baby.createExplosionEmitter();
+			_explosionEmitter = Baby.createExplosionEmitter();
 			
-			var graphicList : Graphiclist = new Graphiclist( sprAssetPlayer1, explosionEmitter );
+			var graphicList : Graphiclist = new Graphiclist( _sprAssetPlayer1, _explosionEmitter );
 			super( startPosition.x, startPosition.y, graphicList, null );
 				
 			type = "player";
@@ -50,13 +50,13 @@ package StinkyGameJam
 			height = 135;
 			setHitbox( 96, 135 );		
 			
-			jumpSound = new Sfx( AssetJump );
-			jumpSound.pan = -0.5;
+			_jumpSound = new Sfx( AssetJump );
+			_jumpSound.pan = -0.5;
 			
 			Input.define( "Jump", Key.ANY );
 			
-			velocity = new Vector3D( 0, 0 );
-			acceleration = new Vector3D( 0, Config.fallingAcceleration );
+			_velocity = new Vector3D( 0, 0 );
+			_acceleration = new Vector3D( 0, Config.fallingAcceleration );
 			
 			coins = 0;
 		}
@@ -83,17 +83,17 @@ package StinkyGameJam
 		
 		protected function updateMovement() : void
 		{
-			velocity.x += acceleration.x * FP.elapsed;
-			velocity.y += acceleration.y * FP.elapsed;
-			if ( jumping )
+			_velocity.x += _acceleration.x * FP.elapsed;
+			_velocity.y += _acceleration.y * FP.elapsed;
+			if ( _jumping )
 			{
-				velocity.y = -Config.jumpingSpeed * FP.elapsed;
+				_velocity.y = -Config.jumpingSpeed * FP.elapsed;
 				// toggle flag off
 				//stopJumping();
 			}
 
-			x += velocity.x * FP.elapsed;
-			y += velocity.y * FP.elapsed;
+			x += _velocity.x * FP.elapsed;
+			y += _velocity.y * FP.elapsed;
 		}
 		
 		protected function checkInput() : void
@@ -110,18 +110,18 @@ package StinkyGameJam
 
 		public function startJumping() : void
 		{
-			sprAssetPlayer1.play("jump");
+			_sprAssetPlayer1.play("jump");
 			for (var i:uint = 0; i < EXPLOSION_SIZE; i++)
 			{
-				explosionEmitter.emit("explode",x, y);
+				_explosionEmitter.emit("explode",x, y);
 			}
-			jumpSound.play();
-			jumping = true;
+			_jumpSound.play();
+			_jumping = true;
 		}
 		
 		public function stopJumping() : void
 		{
-			jumping = false;
+			_jumping = false;
 		}
 		
 		protected function checkCollision() : void
@@ -135,7 +135,7 @@ package StinkyGameJam
 			if ( y < 0 )
 			{
 				y = 0;
-				velocity.y = 0;
+				_velocity.y = 0;
 			}
 			if ( y + height > FP.screen.height )
 			{
@@ -146,8 +146,8 @@ package StinkyGameJam
 		
 		public function bounce() : void
 		{
-			sprAssetPlayer1.play("stand");
-			velocity.y = -velocity.y * Config.bounceRate;			
+			_sprAssetPlayer1.play("stand");
+			_velocity.y = -_velocity.y * Config.bounceRate;			
 		}
 		
 		public function give( item : WorldObject ) : void

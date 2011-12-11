@@ -6,9 +6,9 @@ package StinkyGameJam
 	
 	public class StinkyWorld extends World
 	{
-		protected var level : Level;
-		protected var baby : Baby;
-		protected var coinsText : Text;
+		protected var _level : Level;
+		protected var _baby : Baby;
+		protected var _coinsText : Text;
 		
 		public function StinkyWorld()
 		{
@@ -17,21 +17,21 @@ package StinkyGameJam
 		
 		override public function begin() : void
 		{
-			level = new Level();
-			baby = new Baby( level.getPlayerStart() );
-			add( baby );
-			add( level );
+			_level = new Level();
+			_baby = new Baby( _level.getPlayerStart() );
+			add( _baby );
+			add( _level );
 
 			addGraphic( new Text( "Stinky World" ) );
 			addGraphic( new Text( "Coins:", 500, 10 ) );
-			coinsText = new Text( "0", 550, 10 );
-			addGraphic( coinsText );
+			_coinsText = new Text( "0", 550, 10 );
+			addGraphic( _coinsText );
 		}
 
 		override public function update():void
 		{
 			super.update();
-			coinsText.text = baby.coins.toString();	
+			_coinsText.text = _baby.coins.toString();	
 		}	
 		
 		override public function remove(e:Entity):Entity
@@ -39,7 +39,7 @@ package StinkyGameJam
 			var worldObject : WorldObject = e as WorldObject;
 			if ( worldObject )
 			{
-				level.objectDestroyed( worldObject );
+				_level.objectDestroyed( worldObject );
 			}
 			return super.remove( e );
 		}
