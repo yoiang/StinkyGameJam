@@ -27,6 +27,10 @@ package StinkyGameJam
 		{		
 //			collectSound.play();
 			baby.coins += 1;
+			if (Config.levelScrollSpeed < Config.levelScrollMaxSpeed)
+			{
+				Config.levelScrollSpeed += Config.levelScrollAcceleration;
+			}
 			destroy();
 		}
 	}
