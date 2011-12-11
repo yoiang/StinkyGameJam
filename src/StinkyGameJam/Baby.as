@@ -60,9 +60,9 @@ package StinkyGameJam
 			velocity.y += acceleration.y * FP.elapsed;
 			if ( jumping )
 			{
-				velocity.y = -10000 * FP.elapsed;
+				velocity.y = -20000 * FP.elapsed;
 				// toggle flag off
-				stopJumping();
+//				stopJumping();
 			}
 
 			x += velocity.x * FP.elapsed;
@@ -111,10 +111,10 @@ package StinkyGameJam
 				y = 0;
 				velocity.y = 0;
 			}
-			if ( y + height > FP.screen.height - 10 )
+			if ( y + height > FP.screen.height - 30 )
 			{
 				sprAssetPlayer1.play("stand");
-				y = FP.screen.height - height - 10;
+				y = FP.screen.height - height - 30;
 				velocity.y = -velocity.y * 0.5;
 			}
 		}
