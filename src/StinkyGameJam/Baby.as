@@ -23,8 +23,9 @@ package StinkyGameJam
 		protected var velocity : Vector3D;
 		protected var acceleration : Vector3D;
 		
-		public function Baby(x:Number=0, y:Number=0)
 		public var coins : int;
+		
+		public function Baby( startPosition : Vector3D )
 		{
 			var graphic : Graphic = null;
 			if ( Math.random() < 0.5 )
@@ -34,7 +35,7 @@ package StinkyGameJam
 			{
 				graphic = new Image( AssetPlayer2 );
 			}
-			super(x, y, graphic, null);
+			super( startPosition.x, startPosition.y, graphic, null );
 				
 			type = "player";
 			
@@ -55,6 +56,7 @@ package StinkyGameJam
 		
 		override public function update():void
 		{
+			super.update();
 			checkInput();
 			updateMovement();
 			checkCollision();
@@ -68,7 +70,7 @@ package StinkyGameJam
 			{
 				velocity.y = -10000 * FP.elapsed;
 				// toggle flag off
-//				stopJumping();
+				//stopJumping();
 			}
 
 			x += velocity.x * FP.elapsed;
@@ -118,7 +120,7 @@ package StinkyGameJam
 			}
 		}
 		
-		public function give( item : Item ) : void
+		public function give( item : WorldObject ) : void
 		{
 			item.destroy();
 		}
