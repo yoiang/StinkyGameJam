@@ -157,11 +157,13 @@ package StinkyGameJam
 				worldObject.affectBaby( this );
 			}
 
+/*
 			if ( y < 0 )
 			{
 				y = 0;
 				_velocity.y = 0;
 			}
+*/
 			if ( y + height > FP.screen.height )
 			{
 				// TODO: kill
