@@ -10,6 +10,8 @@ package StinkyGameJam
 			var tilemap : Tilemap = LevelChunkTilemap.createTilemap( tileset, setWidth, setHeight, tileWidth, tileHeight, tileList );
 			super( x, y, 128, 128, tilemap, 10 );
 			setHitbox();
+			
+			_removeIfOffscreen = false;
 		}
 		
 		protected static function createTilemap( asset : *, width : Number, height : Number, tileWidth : Number, tileHeight : Number, tileList : XMLList ) : Tilemap
