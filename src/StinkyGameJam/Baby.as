@@ -176,10 +176,5 @@ package StinkyGameJam
 				landed();
 			}
 		}
-		
-		public function give( item : WorldObject ) : void
-		{
-			item.destroy();
-		}
 	}
 }
