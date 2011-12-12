@@ -1,0 +1,18 @@
+<project>
+	<name>Stinky Game Parallax 1</name>
+	<settings>
+		<defaultWidth>355</defaultWidth>
+		<defaultHeight>480</defaultHeight>
+	</settings>
+	
+	<tilesets>
+		<tileset name="tiles" image="clouds.png" tileWidth="335" tileHeight="109"/>
+	</tilesets>
+	
+	<objects>
+	</objects>
+	
+	<layers>
+		<tiles name="background" gridSize="335" />
+	</layers>
+</project>

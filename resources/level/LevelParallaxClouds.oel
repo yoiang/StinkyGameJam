@@ -1,0 +1,7 @@
+<level>
+  <width>355</width>
+  <height>480</height>
+  <background set="tiles">
+    <tile tx="0" ty="0" x="0" y="0"/>
+  </background>
+</level>
