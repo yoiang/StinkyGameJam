@@ -21,8 +21,11 @@ package StinkyGameJam
 		protected var _sprAssetPlayer1:Spritemap;
 				
 		protected var _jumping : Boolean;
+		protected var _numberOfJumpsLeft : uint;
+		protected var _jumpAmountLeft : Number;
 		[ Embed( source = 'resources/jump.mp3' ) ] private const AssetJump : Class;
 		protected var _jumpSound : Sfx;
+		
 		protected var _velocity : Vector3D;
 		protected var _acceleration : Vector3D;
 		
@@ -93,8 +96,11 @@ package StinkyGameJam
 			if ( _jumping )
 			{
 				_velocity.y = -Config.jumpingSpeed * FP.elapsed;
-				// toggle flag off
-				//stopJumping();
+/*				_jumpAmountLeft -= Config.jumpingSpeed * FP.elapsed;
+				if ( _jumpAmountLeft <= 0 )
+				{
+					stopJumping();
+				}*/
 			}
 
 			x += _velocity.x * FP.elapsed;
@@ -115,18 +121,29 @@ package StinkyGameJam
 
 		public function startJumping() : void
 		{
-			_sprAssetPlayer1.play("jump");
-			for (var i:uint = 0; i < EXPLOSION_SIZE; i++)
+			if ( _numberOfJumpsLeft  > 0 )
 			{
-				_explosionEmitter.emit("explode",x, y);
+				_numberOfJumpsLeft --;
+				//_jumpAmountLeft = Config.jumpAmount;
+				
+				_sprAssetPlayer1.play("jump");
+				for (var i:uint = 0; i < EXPLOSION_SIZE; i++)
+				{
+					_explosionEmitter.emit("explode",x, y);
+				}
+				_jumpSound.play();
+				_jumping = true;
 			}
-			_jumpSound.play();
-			_jumping = true;
 		}
 		
 		public function stopJumping() : void
 		{
 			_jumping = false;
+		}
+		
+		public function landed() : void
+		{
+			_numberOfJumpsLeft = Config.numberOfJumps;
 		}
 		
 		protected function checkCollision() : void
@@ -153,7 +170,11 @@ package StinkyGameJam
 		public function bounce() : void
 		{
 			_sprAssetPlayer1.play("stand");
-			_velocity.y = -_velocity.y * Config.bounceRate;			
+			_velocity.y = -_velocity.y * Config.bounceRate;		
+			if ( _velocity.y > Config.landedSpeed )
+			{
+				landed();
+			}
 		}
 		
 		public function give( item : WorldObject ) : void
