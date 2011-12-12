@@ -9,7 +9,7 @@ package StinkyGameJam
 	
 	public class LevelBackgroundChunk extends LevelChunk
 	{
-		[ Embed( source = 'resources/level/tileSet.png' ) ] private const AssetTileSet : Class;
+		[ Embed( source = 'resources/level/background.png' ) ] private const AssetTileSet : Class;
 		
 		protected var _tileList : XMLList;
 		public function LevelBackgroundChunk( xml : Class )
@@ -24,7 +24,7 @@ package StinkyGameJam
 		
 		public function createTilemap( addTo : Vector.< WorldObject >, offsetX : Number ) : void
 		{
-			var tilemap : LevelChunkTilemap = new LevelChunkTilemap( offsetX, 0, AssetTileSet, width, height, 128, 128, _tileList );
+			var tilemap : LevelChunkTilemap = new LevelChunkTilemap( offsetX, 0, AssetTileSet, width, height, 1280, 480, _tileList );
 			FP.world.add( tilemap );
 			addTo.push( tilemap );
 		}
