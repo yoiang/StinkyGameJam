@@ -23,7 +23,7 @@ package StinkyGameJam
 		protected var _jumping : Boolean;
 		protected var _numberOfJumpsLeft : uint;
 		protected var _jumpAmountLeft : Number;
-		[ Embed( source = 'resources/jump.mp3' ) ] private const AssetJump : Class;
+		[ Embed( source = 'resources/jump2.mp3' ) ] private const AssetJump : Class;
 		protected var _jumpSound : Sfx;
 		
 		protected var _velocity : Vector3D;
@@ -173,11 +173,8 @@ package StinkyGameJam
 		public function bounce() : void
 		{
 			_sprAssetPlayer1.play("stand");
-			_velocity.y = -_velocity.y * Config.bounceRate;		
-			if ( _velocity.y > Config.landedSpeed )
-			{
-				landed();
-			}
+			_velocity.y = -_velocity.y * Config.bounceRate;	
+			landed();
 		}
 	}
 }

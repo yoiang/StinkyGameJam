@@ -8,7 +8,7 @@ package StinkyGameJam
 	public class Coin extends WorldObject
 	{
 		[ Embed( source = 'resources/level/coin.png' ) ] private const AssetImage : Class;
-		[ Embed( source = 'resources/coinCollect.mp3' ) ] private const AssetCollectSound : Class;
+		[ Embed( source = 'resources/coin.mp3' ) ] private const AssetCollectSound : Class;
 		
 		protected var _collectSound : Sfx;
 		
@@ -22,7 +22,7 @@ package StinkyGameJam
 		
 		override public function affectBaby( baby : Baby ) : void
 		{		
-//			collectSound.play();
+			_collectSound.play();
 			baby.coins += 1;
 			if (Config.levelScrollSpeed < Config.levelScrollMaxSpeed)
 			{
