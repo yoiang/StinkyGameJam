@@ -8,7 +8,7 @@ package StinkyGameJam
 	{
 		protected var _removeIfOffscreen : Boolean;
 		
-		public function WorldObject( x : Number, y : Number, setWidth : Number, setHeight : Number, setGraphic : Graphic, setLayer : uint = 0 )
+		public function WorldObject( x : uint, y : uint, setWidth : Number, setHeight : Number, setGraphic : Graphic, setLayer : uint = 0 )
 		{
 			super( x, y, setGraphic );
 			type = "WorldObject";
