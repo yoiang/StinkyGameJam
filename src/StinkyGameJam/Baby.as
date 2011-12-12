@@ -32,7 +32,7 @@ package StinkyGameJam
 		public var coins : int;
 		
 		protected var _explosionEmitter:Emitter;
-		protected const EXPLOSION_SIZE:uint = 100;
+		protected const EXPLOSION_SIZE:uint = 6;
 		
 		public function Baby( startPosition : Vector3D )
 		{
@@ -60,11 +60,13 @@ package StinkyGameJam
 		
 		protected static function createExplosionEmitter() : Emitter
 		{
-			var explosionEmitter : Emitter = new Emitter(new BitmapData(1,1),1,1);
+			var explosionEmitter : Emitter = new Emitter(new BitmapData(10,10),10,10);
 			// Define our particles
 			explosionEmitter.newType("explode",[0]);
 			explosionEmitter.setAlpha("explode",1,0);
-			explosionEmitter.setMotion("explode", 0, 50, 2, 360, -40, -0.5, Ease.quadOut);
+			explosionEmitter.x = 40;
+			explosionEmitter.y = 80;
+			explosionEmitter.setMotion("explode", 190, 150, 1, 40, -40, -0.5, Ease.quadOut);
 			
 			explosionEmitter.relative = false;
 			return explosionEmitter;
