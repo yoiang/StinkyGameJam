@@ -173,8 +173,11 @@ package StinkyGameJam
 		public function bounce() : void
 		{
 			_sprAssetPlayer1.play("stand");
-			_velocity.y = -_velocity.y * Config.bounceRate;
-			landed();
+			_velocity.y = -_velocity.y * Config.bounceRate;		
+			if ( _velocity.y > Config.landedSpeed )
+			{
+				landed();
+			}
 		}
 	}
 }
