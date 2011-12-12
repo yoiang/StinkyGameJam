@@ -6,6 +6,8 @@ package StinkyGameJam
 	
 	public class WorldObject extends Entity
 	{
+		protected var _removeIfOffscreen : Boolean;
+		
 		public function WorldObject( x : Number, y : Number, setWidth : Number, setHeight : Number, setGraphic : Graphic, setLayer : uint = 0 )
 		{
 			super( x, y, setGraphic );
@@ -16,17 +18,22 @@ package StinkyGameJam
 			setHitbox( width, height );
 			
 			layer = setLayer;
+			
+			_removeIfOffscreen = true;
 		}
 		
 		override public function update():void
 		{
 			super.update();
 			
-			// TODO: query level for speed, don't store?
-			x += -Config.levelScrollSpeed * FP.elapsed;
-			if ( x + width < 0 )
+			if ( _removeIfOffscreen )
 			{
-				destroy();
+				// TODO: query level for speed, don't store?
+				x += -Config.levelScrollSpeed * FP.elapsed;
+				if ( x + width < 0 )
+				{
+					destroy();
+				}				
 			}
 		}
 		
