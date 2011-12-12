@@ -37,16 +37,9 @@ package StinkyGameJam
 			_explosionEmitter = Baby.createExplosionEmitter();
 			
 			super( startPosition.x, startPosition.y, 96, 135, new Graphiclist( _sprAssetPlayer1, _explosionEmitter ), 0 );
-				
 			type = "player";
 			
-			_jumpSound = new Sfx( AssetJump );
-			_jumpSound.pan = -0.5;
-			
-			Input.define( "Jump", Key.ANY );
-			
-			_velocity = new Vector3D( 0, 0 );
-			_acceleration = new Vector3D( 0, Config.fallingAcceleration );
+			setupMovement();
 			
 			_removeIfOffscreen = false;
 			
@@ -72,6 +65,17 @@ package StinkyGameJam
 			
 			explosionEmitter.relative = false;
 			return explosionEmitter;
+		}
+		
+		protected function setupMovement() : void
+		{
+			_jumpSound = new Sfx( AssetJump );
+			_jumpSound.pan = -0.5;
+			
+			Input.define( "Jump", Key.ANY );
+			
+			_velocity = new Vector3D( 0, 0 );
+			_acceleration = new Vector3D( 0, Config.fallingAcceleration );
 		}
 		
 		override public function update():void
