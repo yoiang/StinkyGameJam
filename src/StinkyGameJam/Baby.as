@@ -96,6 +96,7 @@ package StinkyGameJam
 			if ( _jumping )
 			{
 				_velocity.y = -Config.jumpingSpeed * FP.elapsed;
+				stopJumping();
 /*				_jumpAmountLeft -= Config.jumpingSpeed * FP.elapsed;
 				if ( _jumpAmountLeft <= 0 )
 				{
