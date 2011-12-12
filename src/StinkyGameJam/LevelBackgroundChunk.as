@@ -9,7 +9,7 @@ package StinkyGameJam
 	
 	public class LevelBackgroundChunk extends LevelChunk
 	{
-		[ Embed( source = 'resources/level/tileSet.png' ) ] private const AssetTileSet : Class;
+		[ Embed( source = 'resources/level/background.png' ) ] private const AssetTileSet : Class;
 		
 		protected var _tileList : XMLList;
 		public function LevelBackgroundChunk( xml : Class )
