@@ -1,18 +1,18 @@
 <project>
 	<name>Stinky Game Background</name>
 	<settings>
-		<defaultWidth>256</defaultWidth>
-		<defaultHeight>512</defaultHeight>
+		<defaultWidth>1280</defaultWidth>
+		<defaultHeight>480</defaultHeight>
 	</settings>
 	
 	<tilesets>
-		<tileset name="tiles" image="tileSet.png" tileWidth="128" tileHeight="128"/>
+		<tileset name="tiles" image="background.png" tileWidth="1280" tileHeight="480"/>
 	</tilesets>
 	
 	<objects>
 	</objects>
 	
 	<layers>
-		<tiles name="background" gridSize="128" />
+		<tiles name="background" gridSize="480" />
 	</layers>
 </project>
