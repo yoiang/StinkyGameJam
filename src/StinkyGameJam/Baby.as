@@ -15,14 +15,13 @@ package StinkyGameJam
 	import net.flashpunk.graphics.Spritemap;
 	import net.flashpunk.utils.*;
 	
-	public class Baby extends Entity
+	public class Baby extends WorldObject
 	{
-		[ Embed( source = 'resources/baby.png' ) ] private const AssetPlayer1 : Class;
-		protected var _sprAssetPlayer1:Spritemap = new Spritemap(AssetPlayer1, 96, 135);
-		
-		[ Embed( source = 'resources/jump.mp3' ) ] private const AssetJump : Class;
-		
+		[ Embed( source = 'resources/baby.png' ) ] private static const AssetPlayer1 : Class;
+		protected var _sprAssetPlayer1:Spritemap;
+				
 		protected var _jumping : Boolean;
+		[ Embed( source = 'resources/jump.mp3' ) ] private const AssetJump : Class;
 		protected var _jumpSound : Sfx;
 		protected var _velocity : Vector3D;
 		protected var _acceleration : Vector3D;
@@ -34,21 +33,12 @@ package StinkyGameJam
 		
 		public function Baby( startPosition : Vector3D )
 		{
-			_sprAssetPlayer1.add("stand", [0, 1], 3, true);
-			_sprAssetPlayer1.add("jump", [2, 3], 3, true);
-			_sprAssetPlayer1.play("stand");
-			
+			_sprAssetPlayer1 = Baby.createSpriteSheet();
 			_explosionEmitter = Baby.createExplosionEmitter();
 			
-			var graphicList : Graphiclist = new Graphiclist( _sprAssetPlayer1, _explosionEmitter );
-			super( startPosition.x, startPosition.y, graphicList, null );
+			super( startPosition.x, startPosition.y, 96, 135, new Graphiclist( _sprAssetPlayer1, _explosionEmitter ), 0 );
 				
 			type = "player";
-			layer = 0;
-			
-			width = 96;
-			height = 135;
-			setHitbox( 96, 135 );		
 			
 			_jumpSound = new Sfx( AssetJump );
 			_jumpSound.pan = -0.5;
@@ -58,7 +48,18 @@ package StinkyGameJam
 			_velocity = new Vector3D( 0, 0 );
 			_acceleration = new Vector3D( 0, Config.fallingAcceleration );
 			
+			_removeIfOffscreen = false;
+			
 			coins = 0;
+		}
+		
+		protected static function createSpriteSheet() : Spritemap
+		{
+			var spritesheet : Spritemap = new Spritemap( AssetPlayer1, 96, 135 );
+			spritesheet.add("stand", [0, 1], 3, true);
+			spritesheet.add("jump", [2, 3], 3, true);
+			spritesheet.play("stand");
+			return spritesheet;
 		}
 		
 		protected static function createExplosionEmitter() : Emitter
@@ -139,6 +140,7 @@ package StinkyGameJam
 			}
 			if ( y + height > FP.screen.height )
 			{
+				// TODO: kill
 				y = FP.screen.height - height;
 				bounce();
 			}
