@@ -1,0 +1,8 @@
+<level>
+  <width>256</width>
+  <height>512</height>
+  <objects>
+    <platform x="0" y="480"/>
+    <girl x="0" y="352"/>
+  </objects>
+</level>

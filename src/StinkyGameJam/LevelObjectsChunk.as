@@ -49,6 +49,10 @@ package StinkyGameJam
 					return new Coin( int( xml.@x ) + offsetX, int( xml.@y ) );
 				break;
 				
+				case "girl":
+					return new Girl( int( xml.@x ) + offsetX, int( xml.@y ) );
+				break;
+
 				case "platform":
 					return new Platform( int( xml.@x ) + offsetX, int( xml.@y ) );
 				break;

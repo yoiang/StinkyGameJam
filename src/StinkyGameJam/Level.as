@@ -13,12 +13,13 @@ package StinkyGameJam
 	{
 		[ Embed( source="resources/level/LevelBackground1.oel", mimeType="application/octet-stream" ) ] private static const AssetBackground1 : Class;
 //		[ Embed( source="resources/level/LevelBackground2.oel", mimeType="application/octet-stream" ) ] private static const AssetBackground2 : Class;		
-		[ Embed( source="resources/level/ObjectsEmpty.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjectsEmpty : Class;
+//		[ Embed( source="resources/level/ObjectsEmpty.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjectsEmpty : Class;
 		[ Embed( source="resources/level/ObjectsHighCoin.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjectsHighCoin : Class;		
 		[ Embed( source="resources/level/ObjectsJustPit.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjectsJustPit : Class;		
 		[ Embed( source="resources/level/ObjectsLotsOCoins.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjectsLotsOCoins : Class;		
 		[ Embed( source="resources/level/ObjectsThreeCoins.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjectsThreeCoins : Class;		
-		[ Embed( source="resources/level/ObjectsTwoPlatform.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjectsTwoPlatform : Class;		
+		[ Embed( source="resources/level/ObjectsGirl.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjectsGirl : Class;		
+//		[ Embed( source="resources/level/ObjectsTwoPlatform.oel", mimeType="application/octet-stream" ) ]    private static const AssetObjectsTwoPlatform : Class;		
 		
 		protected var _backgroundChunkAssets : Vector.<LevelBackgroundChunk>;
 		protected var _currentBackgroundChunkIndices : Vector.< int >;
@@ -44,12 +45,13 @@ package StinkyGameJam
 			_currentBackgroundScrollDistance = 0;
 			
 			_objectsChunkAssets = new Vector.<LevelObjectsChunk>();
-			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsEmpty ) );
+//			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsEmpty ) );
 			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsHighCoin ) );			
 			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsJustPit ) );			
 			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsLotsOCoins ) );			
 			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsThreeCoins ) );
-			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsTwoPlatform ) );
+			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsGirl ) );
+//			_objectsChunkAssets.push( new LevelObjectsChunk( AssetObjectsTwoPlatform ) );
 			_currentObjectChunkIndices = new Vector.<int>();
 			_currentObjectScrollDistance = 0;
 
