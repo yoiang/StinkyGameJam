@@ -27,6 +27,7 @@ package StinkyGameJam
 			if (Config.levelScrollSpeed < Config.levelScrollMaxSpeed)
 			{
 				Config.levelScrollSpeed += Config.levelScrollAcceleration;
+				baby.x += 50;
 			}
 			destroy();
 		}

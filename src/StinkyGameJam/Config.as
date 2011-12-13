@@ -9,8 +9,8 @@ package StinkyGameJam
 //		public static var jumpAmount : uint = 600;
 		public static var bounceRate : Number = 0.5;
 		
-		public static var levelScrollMinSpeed : Number = 200;
-		public static var levelScrollMaxSpeed : Number = 750;
+		public static var levelScrollMinSpeed : Number = 250;
+		public static var levelScrollMaxSpeed : Number = 600;
 		public static var levelScrollSpeed : Number = levelScrollMinSpeed;		
 		public static var levelScrollAcceleration : Number = 50;
 	}

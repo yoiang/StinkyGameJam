@@ -6,10 +6,10 @@ package StinkyGameJam
 	
 	public class Platform extends WorldObject
 	{
-		[ Embed( source = 'resources/level/platform.png' ) ] private const AssetImage : Class;
+		[ Embed( source = 'resources/level/platform2.png' ) ] private const AssetImage : Class;
 		public function Platform( x : Number, y : Number )
 		{
-			super( x, y, 256, 32, new Image( AssetImage ), 2 );			
+			super( x, y, 256, 96, new Image( AssetImage ), 2 );			
 		}
 		
 		override public function affectBaby( baby : Baby ) : void

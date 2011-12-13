@@ -1,8 +1,8 @@
 <project>
 	<name>Stinky Game Objects</name>
 	<settings>
-		<defaultWidth>256</defaultWidth>
-		<defaultHeight>512</defaultHeight>
+		<defaultWidth>1280</defaultWidth>
+		<defaultHeight>480</defaultHeight>
 	</settings>
 	
 	<tilesets>
@@ -12,7 +12,7 @@
 		<object name="playerStart" image="playerStart.png" width="90" height="128" limit="1" />
 		<object name="coin" image="coin.png" width="64" height="64" />
 		<object name="girl" image="girl.png" width="158" height="136" />
-		<object name="platform" image="platform.png" width="256" height="32" />
+		<object name="platform" image="platform2.png" width="256" height="96" />
 	</objects>
 	
 	<layers>

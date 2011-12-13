@@ -1,0 +1,18 @@
+<level>
+  <width>1280</width>
+  <height>480</height>
+  <objects>
+    <platform x="0" y="384"/>
+    <platform x="256" y="384"/>
+    <platform x="512" y="384"/>
+    <platform x="768" y="384"/>
+    <platform x="1024" y="384"/>
+    <coin x="192" y="96"/>
+    <coin x="320" y="256"/>
+    <coin x="544" y="320"/>
+    <coin x="640" y="128"/>
+    <coin x="768" y="224"/>
+    <coin x="960" y="64"/>
+    <coin x="1088" y="224"/>
+  </objects>
+</level>

@@ -24,7 +24,7 @@ package StinkyGameJam
 
 			addGraphic( new Text( "Stinky World" ) );
 			addGraphic( new Text( "Coins:", 500, 10 ) );
-			_coinsText = new Text( "0", 550, 10 );
+			_coinsText = new Text( "0", 550, 10, 200 );
 			addGraphic( _coinsText );
 		}
 
